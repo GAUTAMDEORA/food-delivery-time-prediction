@@ -1,8 +1,9 @@
 import pandas as pd
 import requests
 import time
+import os
 
-API_KEY = '5b3ce3597851110001cf62483b7f8ce3024e411daaea548768eb8f03'
+API_KEY = os.environ["ORS_API_KEY"]  # openrouteservice.org API key
 API_URL = 'https://api.openrouteservice.org/v2/directions/driving-car'
 
 def get_travel_time(source_lat, source_lon, destination_lat, destination_lon):

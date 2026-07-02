@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import requests
@@ -5,7 +6,7 @@ import mysql.connector
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from xgboost import XGBRegressor 
+from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -14,21 +15,21 @@ from sklearn.preprocessing import OneHotEncoder
 
 
 
-api_key_ow = '499f1171108e6c7bf613c0537f7dcf7c'           # open weather api key
-api_key_tt = "YKPHuZ74pdng8wmhRnlxECWA6r2DQu36"           # tom tom api key
+api_key_ow = os.environ["OPENWEATHER_API_KEY"]
+api_key_tt = os.environ["TOMTOM_API_KEY"]
 
-API_KEY = '5b3ce3597851110001cf62483b7f8ce3024e411daaea548768eb8f03'
+API_KEY = os.environ["ORS_API_KEY"]  # openrouteservice.org API key
 API_URL = 'https://api.openrouteservice.org/v2/directions/driving-car'
-    
+
 df = pd.read_csv('temp_csv.csv')
 
 
 
 conn = mysql.connector.connect(
-    host="localhost",        
-    user="root",     
-    password="GAUTAM", 
-    database="ml_project" 
+    host=os.environ.get("DB_HOST", "localhost"),
+    user=os.environ.get("DB_USER", "root"),
+    password=os.environ.get("DB_PASSWORD"),
+    database="ml_project"
 )
 
 
